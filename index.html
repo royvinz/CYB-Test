@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Checklist interactive de sécurisation d'un Agent IA, basée sur OWASP Top 10 for Agentic Applications, OWASP LLM Top 10, NIST AI RMF, NIST AI 600-1, MITRE ATLAS et ISO/IEC 42001." />
+  <meta name="robots" content="index,follow" />
+  <title>CYB-Test — Checklist de sécurisation d'un Agent IA</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="assets/styles.css" />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%2307090d'/><text x='50%25' y='58%25' font-family='monospace' font-size='18' font-weight='800' fill='%2300f5a0' text-anchor='middle'>C</text></svg>" />
+</head>
+<body>
+  <main class="app">
+
+    <!-- ================================================== -->
+    <!-- Top bar                                            -->
+    <!-- ================================================== -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">C</div>
+        <div class="brand-text">
+          <span class="b1">CYB · Test</span>
+          <span class="b2">Checklist · sécurisation d'un <em>Agent IA</em></span>
+        </div>
+      </div>
+      <div class="topbar-meta">
+        <span class="dot"></span>
+        <span>session locale · données stockées dans le navigateur</span>
+      </div>
+    </header>
+
+    <!-- ================================================== -->
+    <!-- Hero — score & stats                               -->
+    <!-- ================================================== -->
+    <section class="hero">
+      <!-- Score panel -->
+      <div class="score-panel">
+        <h2>Posture globale</h2>
+
+        <div class="score-ring">
+          <svg width="180" height="180" viewBox="0 0 180 180">
+            <circle class="ring-bg"   cx="90" cy="90" r="72"></circle>
+            <circle class="ring-fill" cx="90" cy="90" r="72"
+                    id="score-ring-fill"
+                    stroke-dasharray="0 452.39"></circle>
+          </svg>
+          <div class="center">
+            <div>
+              <div class="pct"><span id="score-pct">0</span><sup>%</sup></div>
+              <div class="lbl">Score pondéré</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="posture" id="posture">
+          Évaluation en cours
+          <strong id="posture-label">—</strong>
+        </div>
+      </div>
+
+      <!-- Stats grid + toolbar -->
+      <div>
+        <div class="stats">
+          <div class="stat">
+            <div class="k">Répondus</div>
+            <div class="v" id="stat-answered">0</div>
+            <div class="sub" id="stat-answered-sub">sur 0 contrôles</div>
+          </div>
+          <div class="stat ok">
+            <div class="k">Conformes</div>
+            <div class="v" id="stat-compliant">0</div>
+            <div class="sub">contrôles validés</div>
+          </div>
+          <div class="stat warn">
+            <div class="k">Partiels</div>
+            <div class="v" id="stat-partial">0</div>
+            <div class="sub">à compléter</div>
+          </div>
+          <div class="stat bad">
+            <div class="k">Manquants</div>
+            <div class="v" id="stat-missing">0</div>
+            <div class="sub">à corriger</div>
+          </div>
+          <div class="stat crit">
+            <div class="k">Critiques</div>
+            <div class="v" id="stat-crit">0</div>
+            <div class="sub" id="stat-crit-sub">aucun en attente</div>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <div class="left">
+            <span class="label">Rapports</span>
+            <button class="btn primary" id="btn-export-json">Exporter JSON</button>
+            <button class="btn"         id="btn-export-md">Exporter Markdown</button>
+            <button class="btn"         id="btn-print">Imprimer / PDF</button>
+          </div>
+          <div class="right">
+            <button class="btn"        id="btn-import">Importer un audit</button>
+            <button class="btn danger" id="btn-reset">Tout réinitialiser</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================== -->
+    <!-- Layout : sidebar + content                         -->
+    <!-- ================================================== -->
+    <div class="layout">
+
+      <!-- Sidebar nav -->
+      <aside class="sidebar">
+        <div class="sidebar-head">
+          <span>Sections</span>
+          <span>12</span>
+        </div>
+        <div id="sidebar-list"></div>
+      </aside>
+
+      <!-- Content -->
+      <div class="main" id="content">
+        <!-- Sections rendered by app.js -->
+      </div>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- Footer                                             -->
+    <!-- ================================================== -->
+    <footer class="footer">
+      <div>
+        <h4>Référentiels mobilisés</h4>
+        <ul>
+          <li><a href="https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/" target="_blank" rel="noopener">OWASP Top 10 for Agentic Applications 2026</a> — ASI01 → ASI10</li>
+          <li><a href="https://genai.owasp.org/llm-top-10/" target="_blank" rel="noopener">OWASP Top 10 for LLM Applications 2025</a> — LLM01 → LLM10</li>
+          <li><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener">NIST AI Risk Management Framework 1.0</a> — Govern · Map · Measure · Manage</li>
+          <li><a href="https://doi.org/10.6028/NIST.AI.600-1" target="_blank" rel="noopener">NIST AI 600-1 — Generative AI Profile</a></li>
+          <li><a href="https://atlas.mitre.org/" target="_blank" rel="noopener">MITRE ATLAS</a> — Adversarial Threat Landscape for AI Systems</li>
+          <li><a href="https://www.iso.org/standard/81230.html" target="_blank" rel="noopener">ISO/IEC 42001:2023</a> — AI Management System</li>
+        </ul>
+      </div>
+      <div class="footer-meta">
+        <h4>Outil</h4>
+        <div class="v">CYB-Test · v1.0.0</div>
+        <div>Aucune donnée n'est transmise à un serveur.</div>
+        <div>Sauvegarde automatique dans le navigateur.</div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
